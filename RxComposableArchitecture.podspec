@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/98prabowo/RxComposableArchitecture.git", :tag => "#{spec.version}" }
   spec.license      = { :type => "MIT", :file => "LICENSE" }
     
-  s.swift_version = '5.7'
+  spec.swift_version = '5.7'
   spec.ios.deployment_target = "11.0"
   spec.osx.deployment_target = "10.15"
   spec.tvos.deployment_target = "13.0"
