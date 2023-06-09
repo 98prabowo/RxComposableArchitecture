@@ -233,31 +233,84 @@ public final class Store<State, Action> {
     }
 }
 
-/// A publisher of store state.
-@dynamicMemberLookup
-public struct StorePublisher<State>: ObservableType {
-    public typealias Element = State
-    public let upstream: Observable<State>
-    
-    public func subscribe<Observer>(_ observer: Observer) -> Disposable
-    where Observer: ObserverType, Element == Observer.Element {
-        upstream.subscribe(observer)
-    }
-    
-    internal init(_ upstream: Observable<State>) {
-        self.upstream = upstream
-    }
-    
-    /// Returns the resulting publisher of a given key path.
-    public subscript<LocalState>(
-        dynamicMember keyPath: KeyPath<State, LocalState>
-    ) -> StorePublisher<LocalState>
-    where LocalState: Equatable {
-        StorePublisher<LocalState>(
-            self.upstream
-                .map { $0[keyPath: keyPath] }
-                .distinctUntilChanged()
+extension Store where State: Collection, State.Element: HashDiffable, State: Equatable, State.Element: Equatable {
+    /**
+     A version of scope that scope an collection of sub store.
+
+     This is kinda a version of `ForEachStoreNode`, not composing `WithViewStore` but creates the sub store.
+
+     ## Example
+     ```
+     struct AppState { var todos: [Todo] }
+     struct AppAction { case todo(index: Int, action: TodoAction }
+
+     store.subscribe(\.todos)
+        .drive(onNext: { todos in
+            self.todoNodes = zip(todos.indices, todos).map { (offset, _) in
+                TodoNode(with: store.scope(
+                    identifier: identifier,
+                    action: Action.todo(index:action:)
+                )
+            }
+        })
+        .disposed(by: disposeBag)
+     ```
+
+     But with example above, you created the entire node again and again and it's not the efficient way.
+     You can do some diffing and only creating spesific index, and rest is handle by diffing.
+
+     - Parameters:
+        - identifier: the identifier from `IdentifierType` make sure index is in bounds of the collection
+        - action: A function to transform `LocalAction` to `Action`. `LocalAction` should have `(CollectionIndex, LocalAction)` signature.
+
+     - Returns: A new store with its domain (state and domain) transformed based on the index you set
+     */
+    public func scope<LocalAction>(
+        at identifier: State.Element.IdentifierType,
+        action fromLocalAction: @escaping (LocalAction) -> Action
+    ) -> Store<State.Element, LocalAction>? {
+        let toLocalState: (State.Element.IdentifierType, State) -> State.Element? = { identifier, state in
+            /**
+             if current state is IdentifiedArray, use pre exist subscript by identifier, to improve performance
+             */
+            if let identifiedArray = state as? IdentifiedArrayOf<State.Element> {
+                return identifiedArray[id: identifier]
+            } else {
+                return state.first(where: { $0.id == identifier })
+            }
+        }
+        
+        guard let element = toLocalState(identifier, state) else { return nil }
+
+        let localStore = Store<State.Element, LocalAction>(
+            initialState: element,
+            reducer: Reducer { localState, localAction, _ in
+                self.send(fromLocalAction(localAction))
+                guard let finalState = toLocalState(identifier, self.state) else {
+                    return .none
+                }
+
+                localState = finalState
+                return .none
+            },
+            environment: ()
         )
+
+        // reflect changes on store parent to local store
+        localStore.parentDisposable = stateRelay
+            .distinctUntilChanged()
+            .flatMapLatest { newValue -> Observable<State.Element> in
+                guard let newElement = toLocalState(identifier, newValue) else {
+                    return .empty()
+                }
+
+                return .just(newElement)
+            }
+            .subscribe(onNext: { [weak localStore] newValue in
+                localStore?.state = newValue
+            })
+
+        return localStore
     }
 }
 

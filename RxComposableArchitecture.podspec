@@ -17,9 +17,10 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "Sources/RxComposableArchitecture/**/*.swift"
 
-  spec.dependency 'CasePaths'
+  spec.dependency 'CasePaths', '0.9.0'
   spec.dependency 'Overture'
   spec.dependency 'RxSwift', '~> 6.5'
   spec.dependency 'RxRelay'
+  spec.dependency 'Texture', '~> 3.1'
   spec.xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end

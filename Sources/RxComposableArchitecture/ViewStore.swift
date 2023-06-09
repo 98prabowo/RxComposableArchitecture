@@ -142,3 +142,31 @@ extension ViewStore where State: Equatable {
         self.init(store, removeDuplicates: ==)
     }
 }
+
+/// A publisher of store state.
+@dynamicMemberLookup
+public struct StorePublisher<State>: ObservableType {
+    public typealias Element = State
+    public let upstream: Observable<State>
+    
+    public func subscribe<Observer>(_ observer: Observer) -> Disposable
+    where Observer: ObserverType, Element == Observer.Element {
+        upstream.subscribe(observer)
+    }
+    
+    internal init(_ upstream: Observable<State>) {
+        self.upstream = upstream
+    }
+    
+    /// Returns the resulting publisher of a given key path.
+    public subscript<LocalState>(
+        dynamicMember keyPath: KeyPath<State, LocalState>
+    ) -> StorePublisher<LocalState>
+    where LocalState: Equatable {
+        StorePublisher<LocalState>(
+            self.upstream
+                .map { $0[keyPath: keyPath] }
+                .distinctUntilChanged()
+        )
+    }
+}

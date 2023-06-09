@@ -207,8 +207,7 @@ public struct Effect<Output>: ObservableType {
     ) -> Effect where C.Element == Effect {
         guard let first = effects.first else { return .none }
         
-        return
-        effects
+        return effects
             .dropFirst()
             .reduce(into: first) { effects, effect in
                 effects = effects.concat(effect).eraseToEffect()

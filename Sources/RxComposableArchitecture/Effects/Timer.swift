@@ -33,8 +33,7 @@ extension Effect where Output: RxAbstractInteger {
         on scheduler: SchedulerType
     ) -> Effect {
         
-        return
-        Observable
+        return Observable
             .interval(interval, scheduler: scheduler)
             .eraseToEffect()
             .cancellable(id: id)
