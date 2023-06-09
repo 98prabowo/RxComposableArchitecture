@@ -89,70 +89,70 @@
 ///     )
 ///
 public struct AlertState<Action> {
-  public var message: String?
-  public var primaryButton: Button?
-  public var secondaryButton: Button?
-  public var title: String
-
-  public init(
-    title: String,
-    message: String? = nil,
-    dismissButton: Button? = nil
-  ) {
-    self.title = title
-    self.message = message
-    self.primaryButton = dismissButton
-  }
-
-  public init(
-    title: String,
-    message: String? = nil,
-    primaryButton: Button,
-    secondaryButton: Button
-  ) {
-    self.title = title
-    self.message = message
-    self.primaryButton = primaryButton
-    self.secondaryButton = secondaryButton
-  }
-
-  public struct Button {
-    public var action: Action?
-    public var type: `Type`
-
-    public static func cancel(
-      _ label: String,
-      send action: Action? = nil
-    ) -> Self {
-      Self(action: action, type: .cancel(label: label))
+    public var message: String?
+    public var primaryButton: Button?
+    public var secondaryButton: Button?
+    public var title: String
+    
+    public init(
+        title: String,
+        message: String? = nil,
+        dismissButton: Button? = nil
+    ) {
+        self.title = title
+        self.message = message
+        self.primaryButton = dismissButton
     }
-
-    public static func cancel(
-      send action: Action? = nil
-    ) -> Self {
-      Self(action: action, type: .cancel(label: nil))
+    
+    public init(
+        title: String,
+        message: String? = nil,
+        primaryButton: Button,
+        secondaryButton: Button
+    ) {
+        self.title = title
+        self.message = message
+        self.primaryButton = primaryButton
+        self.secondaryButton = secondaryButton
     }
-
-    public static func `default`(
-      _ label: String,
-      send action: Action? = nil
-    ) -> Self {
-      Self(action: action, type: .default(label: label))
+    
+    public struct Button {
+        public var action: Action?
+        public var type: `Type`
+        
+        public static func cancel(
+            _ label: String,
+            send action: Action? = nil
+        ) -> Self {
+            Self(action: action, type: .cancel(label: label))
+        }
+        
+        public static func cancel(
+            send action: Action? = nil
+        ) -> Self {
+            Self(action: action, type: .cancel(label: nil))
+        }
+        
+        public static func `default`(
+            _ label: String,
+            send action: Action? = nil
+        ) -> Self {
+            Self(action: action, type: .default(label: label))
+        }
+        
+        public static func destructive(
+            _ label: String,
+            send action: Action? = nil
+        ) -> Self {
+            Self(action: action, type: .destructive(label: label))
+        }
+        
+        public enum `Type`: Hashable {
+            case cancel(label: String?)
+            case `default`(label: String)
+            case destructive(label: String)
+        }
     }
-
-    public static func destructive(
-      _ label: String,
-      send action: Action? = nil
-    ) -> Self {
-      Self(action: action, type: .destructive(label: label))
-    }
-
-    public enum `Type`: Hashable {
-      case cancel(label: String?)
-      case `default`(label: String)
-      case destructive(label: String)
-    }
-  }
 }
 
 extension AlertState: Equatable where Action: Equatable {}
@@ -160,5 +160,5 @@ extension AlertState: Hashable where Action: Hashable {}
 extension AlertState.Button: Equatable where Action: Equatable {}
 extension AlertState.Button: Hashable where Action: Hashable {}
 extension AlertState: Identifiable where Action: Hashable {
-  public var id: Self { self }
+    public var id: Self { self }
 }

@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "texture",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shimastripe/Texture.git",
+      "state" : {
+        "revision" : "ef22942d014ed0f7d0cca9d708e335e06fb1dddb",
+        "version" : "3.1.1"
+      }
+    },
+    {
       "identity" : "xctest-dynamic-overlay",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",

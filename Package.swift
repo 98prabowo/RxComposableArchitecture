@@ -15,10 +15,14 @@ let package = Package(
         .library(
             name: "RxComposableArchitecture",
             targets: ["RxComposableArchitecture"]),
+        .library(
+            name: "RxComposableArchitectureUI",
+            targets: ["RxComposableArchitectureUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "0.14.1"),
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.6.0")
+        .package(url: "https://github.com/pointfreeco/swift-case-paths", from: Version(0, 14, 1)),
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", from: Version(6, 6, 0)),
+        .package(url: "https://github.com/shimastripe/Texture.git", from: Version(3, 1, 1))
     ],
     targets: [
         .target(
@@ -26,6 +30,7 @@ let package = Package(
             dependencies: [
                 .product(name: "CasePaths", package: "swift-case-paths"),
                 .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift")
             ]
         ),
@@ -33,6 +38,20 @@ let package = Package(
             name: "RxComposableArchitectureTests",
             dependencies: [
                 "RxComposableArchitecture",
+                .product(name: "RxTest", package: "RxSwift")
+            ]
+        ),
+        .target(
+            name: "RxComposableArchitectureUI",
+            dependencies: [
+                "RxComposableArchitecture",
+                .product(name: "AsyncDisplayKit", package: "Texture"),
+            ]
+        ),
+        .testTarget(
+            name: "RxComposableArchitectureUITests",
+            dependencies: [
+                "RxComposableArchitectureUI",
                 .product(name: "RxTest", package: "RxSwift")
             ]
         ),
