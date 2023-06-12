@@ -4,10 +4,10 @@ import XCTest
 
 @testable import RxComposableArchitecture
 
-final class StoreTests: XCTestCase {
-    var disposeBag = DisposeBag()
+internal final class StoreTests: XCTestCase {
+    internal var disposeBag = DisposeBag()
     
-    func testCancellableIsRemovedOnImmediatelyCompletingEffect() {
+    internal func testCancellableIsRemovedOnImmediatelyCompletingEffect() {
         let reducer = Reducer<Void, Void, Void> { _, _, _ in .none }
         let store = Store(initialState: (), reducer: reducer, environment: ())
         
@@ -18,7 +18,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(store.effectDisposables.count, 0)
     }
     
-    func testCancellableIsRemovedWhenEffectCompletes() {
+    internal func testCancellableIsRemovedWhenEffectCompletes() {
         let scheduler = TestScheduler.default()
         let effect = Effect<Void>(value: ())
             .delay(.seconds(1), scheduler: scheduler)
@@ -47,7 +47,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(store.effectDisposables.count, 0)
     }
     
-    func testScopedStoreReceivesUpdatesFromParent() {
+    internal func testScopedStoreReceivesUpdatesFromParent() {
         let counterReducer = Reducer<Int, Void, Void> { state, _, _ in
             state += 1
             return .none
@@ -69,7 +69,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(values, ["0", "1"])
     }
     
-    func testParentStoreReceivesUpdatesFromChild() {
+    internal func testParentStoreReceivesUpdatesFromChild() {
         let counterReducer = Reducer<Int, Void, Void> { state, _, _ in
             state += 1
             return .none
@@ -91,7 +91,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(values, [0, 1])
     }
     
-    func testScopeWithPublisherTransform() {
+    internal func testScopeWithPublisherTransform() {
         let counterReducer = Reducer<Int, Int, Void> { state, action, _ in
             state = action
             return .none
@@ -121,7 +121,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(outputs, ["0", "1", "2"])
     }
     
-    func testScopeCallCount() {
+    internal func testScopeCallCount() {
         let counterReducer = Reducer<Int, Void, Void> { state, _, _ in state += 1
             return .none
         }
@@ -136,7 +136,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(numCalls1, 2)
     }
     
-    func testScopeCallCount2() {
+    internal func testScopeCallCount2() {
         let counterReducer = Reducer<Int, Void, Void> { state, _, _ in
             state += 1
             return .none
@@ -183,7 +183,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(numCalls3, 14)
     }
     
-    func testSynchronousEffectsSentAfterSinking() {
+    internal func testSynchronousEffectsSentAfterSinking() {
         enum Action {
             case tap
             case next1
@@ -218,7 +218,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(values, [1, 2, 3, 4])
     }
     
-    func testLotsOfSynchronousActions() {
+    internal func testLotsOfSynchronousActions() {
         enum Action { case incr, noop }
         let reducer = Reducer<Int, Action, ()> { state, action, _ in
             switch action {
@@ -235,7 +235,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(ViewStore(store).state, 100_000)
     }
     
-    func testPublisherScope() {
+    internal func testPublisherScope() {
         let appReducer = Reducer<Int, Bool, Void> { state, action, _ in
             state += action ? 1 : 0
             return .none
@@ -267,7 +267,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(outputs, [0, 1])
     }
     
-    func testIfLetAfterScope() {
+    internal func testIfLetAfterScope() {
         struct AppState {
             var count: Int?
         }
@@ -317,7 +317,7 @@ final class StoreTests: XCTestCase {
         XCTAssertEqual(outputs, [nil, 1, nil, 1, nil, 1, nil])
     }
     
-    func testIfLetTwo() {
+    internal func testIfLetTwo() {
         let parentStore = Store(
             initialState: 0,
             reducer: Reducer<Int?, Bool, Void> { state, action, _ in

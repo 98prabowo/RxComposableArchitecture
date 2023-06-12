@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "RxComposableArchitecture",
     platforms: [
-      .iOS(.v11)
+      .iOS(.v11),
+      .macOS(.v10_15)
     ],
     products: [
         .library(
@@ -16,7 +17,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-case-paths", exact: Version(0, 9, 0)),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: Version(6, 6, 0)),
-        .package(url: "https://github.com/shimastripe/Texture.git", from: Version(3, 1, 1))
+        .package(url: "https://github.com/nickaroot/Texture.git", branch: "spm"),
     ],
     targets: [
         .target(

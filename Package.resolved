@@ -1,6 +1,51 @@
 {
   "pins" : [
     {
+      "identity" : "iglistkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nickaroot/IGListKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "501cccc6f03247b48d080dd010487e4614135792"
+      }
+    },
+    {
+      "identity" : "libwebp-xcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/libwebp-Xcode",
+      "state" : {
+        "revision" : "4f52fc9b29600a03de6e05af16df0d694cb44301",
+        "version" : "1.2.4"
+      }
+    },
+    {
+      "identity" : "pincache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pinterest/PINCache.git",
+      "state" : {
+        "revision" : "875c654984fb52b47ca65ae70d24852b0003ccd9",
+        "version" : "3.0.3"
+      }
+    },
+    {
+      "identity" : "pinoperation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pinterest/PINOperation.git",
+      "state" : {
+        "revision" : "40504c156a68b20f98f7ddc73a115cbb7893be25",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "pinremoteimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pinterest/PINRemoteImage.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ef547920dfe0e1922c25d9abb959acd102f8c2b5"
+      }
+    },
+    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
@@ -21,10 +66,10 @@
     {
       "identity" : "texture",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/shimastripe/Texture.git",
+      "location" : "https://github.com/nickaroot/Texture.git",
       "state" : {
-        "revision" : "ef22942d014ed0f7d0cca9d708e335e06fb1dddb",
-        "version" : "3.1.1"
+        "branch" : "spm",
+        "revision" : "87906e8aefa11ad571af97228181c04ff8874676"
       }
     }
   ],

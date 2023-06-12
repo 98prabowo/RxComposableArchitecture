@@ -3,10 +3,10 @@ import RxSwift
 import RxTest
 import XCTest
 
-final class ComposableArchitectureTests: XCTestCase {
-    var disposeBag = DisposeBag()
+internal final class RxComposableArchitectureTests: XCTestCase {
+    internal var disposeBag = DisposeBag()
     
-    func testScheduling() {
+    internal func testScheduling() {
         enum CounterAction: Equatable {
             case incrAndSquareLater
             case incrNow
@@ -63,7 +63,7 @@ final class ComposableArchitectureTests: XCTestCase {
         )
     }
     
-    func testLongLivingEffects() {
+    internal func testLongLivingEffects() {
         typealias Environment = (
             startEffect: Effect<Void>,
             stopEffect: Effect<Never>
@@ -103,7 +103,7 @@ final class ComposableArchitectureTests: XCTestCase {
         )
     }
     
-    func testCancellation() {
+    internal func testCancellation() {
         enum Action: Equatable {
             case cancel
             case incr
