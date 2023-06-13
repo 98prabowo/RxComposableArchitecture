@@ -1,4 +1,3 @@
-#if DEBUG
 import RxSwift
 import Foundation
 
@@ -469,5 +468,3 @@ private let _XCTCurrentTestCase =
 _XCTest
     .flatMap { dlsym($0, "_XCTCurrentTestCase") }
     .map({ unsafeBitCast($0, to: XCTCurrentTestCase.self) })
-
-#endif
