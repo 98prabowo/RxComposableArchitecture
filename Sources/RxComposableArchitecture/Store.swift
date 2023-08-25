@@ -313,4 +313,3 @@ extension Store where State: Collection, State.Element: HashDiffable, State: Equ
         return localStore
     }
 }
-

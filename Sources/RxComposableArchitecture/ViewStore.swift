@@ -115,11 +115,11 @@ public final class ViewStore<State, Action> {
     public func subscribe<LocalState>(
         _ toLocalState: @escaping (State) -> LocalState,
         removeDuplicates isDuplicate: @escaping (LocalState, LocalState) -> Bool
-    ) -> Driver<LocalState> {
+    ) -> Effect<LocalState> {
         return stateRelay
-            .asDriver()
             .map(toLocalState)
             .distinctUntilChanged(isDuplicate)
+            .eraseToEffect()
     }
     
     /// Subscribe the state and accept it as a driver.
@@ -129,11 +129,11 @@ public final class ViewStore<State, Action> {
     /// - Returns: A driver of `LocalState` that accept different element (always distinctUntilChanged).
     public func subscribe<LocalState>(
         _ toLocalState: @escaping (State) -> LocalState
-    ) -> Driver<LocalState> where LocalState: Equatable {
+    ) -> Effect<LocalState> where LocalState: Equatable {
         return stateRelay
-            .asDriver()
             .map(toLocalState)
             .distinctUntilChanged()
+            .eraseToEffect()
     }
 }
 
@@ -168,5 +168,17 @@ public struct StorePublisher<State>: ObservableType {
                 .map { $0[keyPath: keyPath] }
                 .distinctUntilChanged()
         )
+    }
+}
+
+extension ViewStore {
+    public func subscribeNeverEqual<LocalState: Equatable>(
+        _ toLocalState: @escaping (State) -> NeverEqual<LocalState>
+    ) -> Effect<LocalState> {
+        return stateRelay
+            .map(toLocalState)
+            .distinctUntilChanged()
+            .map(\.wrappedValue)
+            .eraseToEffect()
     }
 }

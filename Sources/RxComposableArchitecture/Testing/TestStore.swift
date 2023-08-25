@@ -207,13 +207,14 @@ extension TestStore where LocalState: Equatable {
             case let .send(action, update):
                 if !receivedActions.isEmpty {
                     _XCTFail(
-              """
-              Must handle \(receivedActions.count) received \
-              action\(receivedActions.count == 1 ? "" : "s") before sending an action: …
-              
-              Unhandled actions: \(debugOutput(receivedActions))
-              """,
-              file: step.file, line: step.line
+                      """
+                      Must handle \(receivedActions.count) received \
+                      action\(receivedActions.count == 1 ? "" : "s") before sending an action: …
+                      
+                      Unhandled actions: \(debugOutput(receivedActions))
+                      """,
+                      file: step.file,
+                      line: step.line
                     )
                 }
                 runReducer(action: self.fromLocalAction(action))
@@ -222,11 +223,11 @@ extension TestStore where LocalState: Equatable {
             case let .receive(expectedAction, update):
                 guard !receivedActions.isEmpty else {
                     _XCTFail(
-              """
-              Expected to receive an action, but received none.
-              """,
-              file: step.file,
-              line: step.line
+                      """
+                      Expected to receive an action, but received none.
+                      """,
+                      file: step.file,
+                      line: step.line
                     )
                     break
                 }
@@ -237,11 +238,11 @@ extension TestStore where LocalState: Equatable {
                         .map { ": …\n\n\($0.indent(by: 4))\n\n(Expected: −, Actual: +)" }
                     ?? ""
                     _XCTFail(
-              """
-              Received unexpected action\(diff)
-              """,
-              file: step.file,
-              line: step.line
+                      """
+                      Received unexpected action\(diff)
+                      """,
+                      file: step.file,
+                      line: step.line
                     )
                 }
                 runReducer(action: receivedAction)
@@ -250,13 +251,14 @@ extension TestStore where LocalState: Equatable {
             case let .environment(work):
                 if !receivedActions.isEmpty {
                     _XCTFail(
-              """
-              Must handle \(receivedActions.count) received \
-              action\(receivedActions.count == 1 ? "" : "s") before performing this work: …
-              
-              Unhandled actions: \(debugOutput(receivedActions))
-              """,
-              file: step.file, line: step.line
+                      """
+                      Must handle \(receivedActions.count) received \
+                      action\(receivedActions.count == 1 ? "" : "s") before performing this work: …
+                      
+                      Unhandled actions: \(debugOutput(receivedActions))
+                      """,
+                      file: step.file,
+                      line: step.line
                     )
                 }
                 
@@ -270,44 +272,44 @@ extension TestStore where LocalState: Equatable {
                     .map { ": …\n\n\($0.indent(by: 4))\n\n(Expected: −, Actual: +)" }
                 ?? ""
                 _XCTFail(
-            """
-            State change does not match expectation\(diff)
-            """,
-            file: step.file,
-            line: step.line
+                    """
+                    State change does not match expectation\(diff)
+                    """,
+                    file: step.file,
+                    line: step.line
                 )
             }
         }
         
         if !receivedActions.isEmpty {
             _XCTFail(
-          """
-          Received \(receivedActions.count) unexpected \
-          action\(receivedActions.count == 1 ? "" : "s"): …
-          
-          Unhandled actions: \(debugOutput(receivedActions))
-          """,
-          file: file,
-          line: line
+              """
+              Received \(receivedActions.count) unexpected \
+              action\(receivedActions.count == 1 ? "" : "s"): …
+              
+              Unhandled actions: \(debugOutput(receivedActions))
+              """,
+              file: file,
+              line: line
             )
         }
         if effectDisposables.count != 0 {
             _XCTFail(
-          """
-          Some effects are still running. All effects must complete by the end of the assertion.
-          
-          This can happen for a few reasons:
-          
-          • If you are using a scheduler in your effect, then make sure that you wait enough time \
-          for the effect to finish. If you are using a test scheduler, then make sure you advance \
-          the scheduler so that the effects complete.
-          
-          • If you are using long-living effects (for example timers, notifications, etc.), then \
-          ensure those effects are completed by returning an `Effect.cancel` effect from a \
-          particular action in your reducer, and sending that action in the test.
-          """,
-          file: file,
-          line: line
+              """
+              Some effects are still running. All effects must complete by the end of the assertion.
+              
+              This can happen for a few reasons:
+              
+              • If you are using a scheduler in your effect, then make sure that you wait enough time \
+              for the effect to finish. If you are using a test scheduler, then make sure you advance \
+              the scheduler so that the effects complete.
+              
+              • If you are using long-living effects (for example timers, notifications, etc.), then \
+              ensure those effects are completed by returning an `Effect.cancel` effect from a \
+              particular action in your reducer, and sending that action in the test.
+              """,
+              file: file,
+              line: line
             )
         }
     }
