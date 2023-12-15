@@ -21,8 +21,7 @@ internal struct Stack<Element> {
     - https://github.com/Instagram/IGListKit/blob/master/Source/IGListDiff.mm
 
     **If You want to learn the Algorithm**
-    - https://github.com/AmbarSeptian/DiffingSharingSession
-    - https://docs.google.com/spreadsheets/d/10CV51it4Oq_Uv1sTS8wBLdGyiE6t5OGtFBT-gCn7w1k/edit?usp=sharing
+    - https://github.com/98prabowo/DiffingSharingSession
  */
 public enum DiffingInterfaceList {
     /// Used to track data stats while diffing.
