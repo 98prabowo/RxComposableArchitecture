@@ -1,48 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "iglistkit",
+      "identity" : "descriptors",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nickaroot/IGListKit",
+      "location" : "https://github.com/FluidGroup/Descriptors",
       "state" : {
-        "branch" : "main",
-        "revision" : "501cccc6f03247b48d080dd010487e4614135792"
-      }
-    },
-    {
-      "identity" : "libwebp-xcode",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/libwebp-Xcode",
-      "state" : {
-        "revision" : "4f52fc9b29600a03de6e05af16df0d694cb44301",
-        "version" : "1.2.4"
-      }
-    },
-    {
-      "identity" : "pincache",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pinterest/PINCache.git",
-      "state" : {
-        "revision" : "875c654984fb52b47ca65ae70d24852b0003ccd9",
-        "version" : "3.0.3"
-      }
-    },
-    {
-      "identity" : "pinoperation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pinterest/PINOperation.git",
-      "state" : {
-        "revision" : "40504c156a68b20f98f7ddc73a115cbb7893be25",
-        "version" : "1.2.2"
-      }
-    },
-    {
-      "identity" : "pinremoteimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pinterest/PINRemoteImage.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "ef547920dfe0e1922c25d9abb959acd102f8c2b5"
+        "revision" : "f41ce2605a76c5d378fe8c5e8c5c98b544dfd108",
+        "version" : "0.2.3"
       }
     },
     {
@@ -66,10 +30,18 @@
     {
       "identity" : "texture",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nickaroot/Texture.git",
+      "location" : "https://github.com/FluidGroup/Texture.git",
       "state" : {
         "branch" : "spm",
-        "revision" : "87906e8aefa11ad571af97228181c04ff8874676"
+        "revision" : "17e0b467fe7360cfb29f2612785acf60e86775e9"
+      }
+    },
+    {
+      "identity" : "textureswiftsupport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FluidGroup/TextureSwiftSupport",
+      "state" : {
+        "revision" : "4fe38cfb8ab3a00fc9e792f4901955bc0ca711af"
       }
     }
   ],
