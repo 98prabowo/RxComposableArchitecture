@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "RxComposableArchitecture"
-  spec.version      = "0.1.7"
+  spec.version      = "0.1.8"
   spec.summary      = "A RxSwift fork of The Composable Architecture."
 
   spec.description  = <<-DESC
@@ -22,6 +22,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'RxCocoa', '~> 6.5'
   spec.dependency 'RxSwift', '~> 6.5'
   spec.dependency 'RxRelay'
-  spec.dependency 'Texture', '~> 3.1'
+  spec.dependency 'TextureSwiftSupport', '~> 3.19'
   spec.xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end

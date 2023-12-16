@@ -1,21 +1,21 @@
-import AsyncDisplayKit
+import TextureSwiftSupport
 
 public struct LayoutSpecOptions {
-    /** The direction children are stacked in */
+    /// The direction children are stacked in
     public var stackDirection: ASStackLayoutDirection
-    /** Whether children are stacked into a single or multiple lines. */
+    /// Whether children are stacked into a single or multiple lines.
     public var flexWrap: ASStackLayoutFlexWrap
-    /** If no children are flexible, how should this spec justify its children in the available space? */
+    /// If no children are flexible, how should this spec justify its children in the available space?
     public var justifyContent: ASStackLayoutJustifyContent
-    /** Orientation of children along cross axis */
+    /// Orientation of children along cross axis
     public var alignItems: ASStackLayoutAlignItems
-    /** If the stack spreads on multiple lines using flexWrap, the amount of space between lines. */
+    /// If the stack spreads on multiple lines using flexWrap, the amount of space between lines.
     public var lineSpacing: CGFloat
-    /** The spacing between the children */
+    /// The spacing between the children
     public var spacing: CGFloat
-    /** Inside insets */
+    /// Inside insets
     public var insets: UIEdgeInsets
-
+    
     /**
      `LayoutSpecOptions` is used to configure `ForEachStoreNode` layoutSpec
 
