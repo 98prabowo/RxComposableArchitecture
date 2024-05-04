@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FluidGroup/Texture.git",
       "state" : {
-        "branch" : "spm",
-        "revision" : "17e0b467fe7360cfb29f2612785acf60e86775e9"
+        "revision" : "68df47f0d26522da76b06f22e9a97e4d4ab58dad",
+        "version" : "3.0.2"
       }
     },
     {
@@ -41,7 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FluidGroup/TextureSwiftSupport",
       "state" : {
-        "revision" : "4fe38cfb8ab3a00fc9e792f4901955bc0ca711af"
+        "revision" : "fb748d6a9d0a2dca0635227e1db0360fd26e0e24",
+        "version" : "3.20.1"
       }
     }
   ],
