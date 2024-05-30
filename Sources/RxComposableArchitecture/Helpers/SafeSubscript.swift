@@ -5,7 +5,7 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - index: Subscribed index.
-    public subscript(safe index: Index) -> Element? {
+    internal subscript(safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
@@ -15,7 +15,7 @@ extension MutableCollection {
     ///
     /// - Parameters:
     ///     - index: Subscribed index.
-    public subscript(safe index: Index) -> Element? {
+    internal subscript(safe index: Index) -> Element? {
         get {
             return indices.contains(index) ? self[index] : nil
         }
@@ -30,7 +30,7 @@ extension MutableCollection {
     /// - Parameters:
     ///     - keyPath: Mutated keypath.
     ///     - value: Updated value.
-    public mutating func update<T>(_ keyPath: WritableKeyPath<Element, T>, _ value: T) {
+    internal mutating func update<T>(_ keyPath: WritableKeyPath<Element, T>, _ value: T) {
         indices.forEach { self[$0][keyPath: keyPath] = value }
     }
 }
