@@ -36,8 +36,11 @@ import Foundation
 ///         }
 ///       }
 ///     }
-public struct IdentifiedArray<ID, Element>: MutableCollection, RandomAccessCollection
-    where ID: Hashable {
+public struct IdentifiedArray<ID, Element>: MutableCollection, RandomAccessCollection, Sendable
+where
+    ID: Hashable & Sendable,
+    Element: Sendable
+{
     /// A key path to a value that identifies an element.
     public let id: KeyPath<Element, ID>
 
