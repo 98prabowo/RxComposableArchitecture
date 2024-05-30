@@ -17,7 +17,7 @@ import Foundation
  */
 
 @propertyWrapper
-public struct UniqueElements<State>: Equatable where State: Collection & Equatable, State.Element: HashDiffable {
+public struct UniqueElements<State>: Equatable, Sendable where State: Collection & Equatable & Sendable, State.Element: HashDiffable {
     public var wrappedValue: State {
         didSet {
             wrappedValue = Self.getUniqueState(wrappedValue)
