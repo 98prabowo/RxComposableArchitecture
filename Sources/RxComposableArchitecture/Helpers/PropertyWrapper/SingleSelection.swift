@@ -89,9 +89,9 @@ import Foundation
  everytime array is mutated, SingleSelection need to check if only one item is selected every time mutation happend.
  */
 @propertyWrapper
-public struct SingleSelection<Element> where Element: HashDiffable {
-    private let _getSelection: (Element) -> Bool
-    private let _setSelection: (inout Element, Bool) -> Void
+public struct SingleSelection<Element>: Sendable where Element: Sendable & HashDiffable {
+    private let _getSelection: @Sendable (Element) -> Bool
+    private let _setSelection: @Sendable (inout Element, Bool) -> Void
 
     private var _currentSelectedId: Element.IdentifierType?
     private var _wrappedValue: IdentifiedArrayOf<Element>
@@ -115,8 +115,8 @@ public struct SingleSelection<Element> where Element: HashDiffable {
      */
     public init(
         wrappedValue: IdentifiedArrayOf<Element> = [],
-        extract: @escaping (Element) -> Bool,
-        set: @escaping (inout Element, Bool) -> Void
+        extract: @Sendable @escaping (Element) -> Bool,
+        set: @Sendable @escaping (inout Element, Bool) -> Void
     ) {
         _wrappedValue = wrappedValue
         _getSelection = extract
