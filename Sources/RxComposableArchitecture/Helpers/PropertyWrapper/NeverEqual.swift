@@ -55,7 +55,7 @@ import Foundation
  
 */
 @propertyWrapper
-public struct NeverEqual<Value>: Equatable where Value: Equatable {
+public struct NeverEqual<Value>: Equatable, Sendable where Value: Equatable & Sendable {
      private var value: Value
      private var numberOfIncrement: UInt8 = 0
 
