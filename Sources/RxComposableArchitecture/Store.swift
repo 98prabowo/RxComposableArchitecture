@@ -84,9 +84,13 @@ public final class Store<State, Action> {
                 return .none
             }
         )
+        
         localStore.parentDisposable = self.observable
-            .subscribe(onNext: { [weak localStore] newValue in localStore?.state = toLocalState(newValue)
+            .subscribe(onNext: { [weak localStore] newValue in
+                guard let localStore = localStore else { return }
+                localStore.state = toLocalState(newValue)
             })
+        
         return localStore
     }
     

@@ -63,7 +63,7 @@ public final class ViewStore<State, Action> {
     ///
     /// - Parameters:
     ///   - store: A store.
-    ///   - isDuplicate: A function to determine when two `State` values are equal. When values are
+    ///   - removeDuplicates: A function to determine when two `State` values are equal. When values are
     ///     equal, repeat view computations are removed.
     public init(
         _ store: Store<State, Action>,
