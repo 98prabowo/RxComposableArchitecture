@@ -44,7 +44,7 @@ extension AnyHashDiffable: CustomDebugStringConvertible {
     }
 }
 
-internal protocol AnyHashDiffableBox {
+internal protocol AnyHashDiffableBox: Sendable {
     var base: Any { get }
     var id: AnyHashable { get }
     

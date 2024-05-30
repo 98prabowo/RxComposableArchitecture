@@ -1,7 +1,7 @@
 import Foundation
 
-public protocol HashDiffable {
-    associatedtype IdentifierType: Hashable
+public protocol HashDiffable: Sendable {
+    associatedtype IdentifierType: Hashable, Sendable
     var id: Self.IdentifierType { get }
     func isEqual(to source: Self) -> Bool
 }
