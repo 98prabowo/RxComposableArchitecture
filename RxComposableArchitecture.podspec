@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
   spec.source_files  = "Sources/RxComposableArchitecture/**/*.swift"
 
   spec.dependency 'CasePaths'
-  spec.dependency 'Overture' '~> 0.3'
+  spec.dependency 'Overture', '~> 0.3'
   spec.dependency 'RxCocoa', '~> 6.5'
   spec.dependency 'RxSwift', '~> 6.5'
   spec.dependency 'RxRelay'
