@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "RxComposableArchitecture"
-  spec.version      = "1.0.8"
+  spec.version      = "1.0.9"
   spec.summary      = "A RxSwift fork of The Composable Architecture."
 
   spec.description  = <<-DESC
@@ -18,7 +18,6 @@ Pod::Spec.new do |spec|
   spec.source_files  = "Sources/RxComposableArchitecture/**/*.swift"
 
   spec.dependency 'CasePaths'
-  spec.dependency 'Overture', '~> 0.3'
   spec.dependency 'RxCocoa', '~> 6.5'
   spec.dependency 'RxSwift', '~> 6.5'
   spec.dependency 'RxRelay'
