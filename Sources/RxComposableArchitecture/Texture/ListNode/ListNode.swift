@@ -37,7 +37,7 @@ public class ListNode<Item: HashDiffable & Equatable>: ASCollectionNode, ListNod
         self.disposeBag = DisposeBag()
         super.init(
             frame: .zero,
-            collectionViewLayout: UICollectionViewFlowLayout(),
+            collectionViewLayout: collectionViewLayout,
             layoutFacilitator: nil
         )
         dataSource = proxy
@@ -151,7 +151,7 @@ public class ListNode<Item: HashDiffable & Equatable>: ASCollectionNode, ListNod
         
         let oldItems: [Item] = items
         
-        #if DEBUG
+        #if DEV || DEBUG
             if !newItems.isEmpty, newItems != newItems.removeDuplicates(), !isUnitTest {
                 assertionFailure("Duplicate items detected, please use @UniqueElements on your items")
             }
