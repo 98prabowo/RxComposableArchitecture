@@ -27,7 +27,7 @@ public struct OptionalPath<Root, Value> {
         )
     }
     
-    public init(_ casePath: CasePath<Root, Value>) {
+    public init(_ casePath: AnyCasePath<Root, Value>) {
         self.init(
             extract: casePath.extract(from:),
             set: { $0 = casePath.embed($1) }
@@ -48,7 +48,7 @@ public struct OptionalPath<Root, Value> {
     }
     
     public func appending<AppendedValue>(
-        path: CasePath<Value, AppendedValue>
+        path: AnyCasePath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         appending(path: .init(path))
     }
@@ -73,7 +73,7 @@ public struct OptionalPath<Root, Value> {
     }
 }
 
-extension CasePath {
+extension AnyCasePath {
     public func appending<AppendedValue>(
         path: OptionalPath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
@@ -106,7 +106,7 @@ extension WritableKeyPath {
     }
     
     public func appending<AppendedValue>(
-        path: CasePath<Value, AppendedValue>
+        path: AnyCasePath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         appending(path: .init(path))
     }
@@ -114,7 +114,7 @@ extension WritableKeyPath {
 
 extension OptionalPath where Root == Value {
     public static var `self`: OptionalPath {
-        .init(.self)
+        OptionalPath(.self)
     }
 }
 
@@ -173,7 +173,7 @@ extension OptionalPath {
     /// - Returns: A new optional path from the first optional path's root to the second case path's value.
     public static func .. <AppendedValue>(
         lhs: OptionalPath,
-        rhs: CasePath<Value, AppendedValue>
+        rhs: AnyCasePath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         return lhs.appending(path: rhs)
     }
@@ -205,13 +205,13 @@ extension WritableKeyPath {
     /// - Returns: A new optional path from the first writeable path's root to the second case path's value.
     public static func .. <AppendedValue>(
         lhs: WritableKeyPath,
-        rhs: CasePath<Value, AppendedValue>
+        rhs: AnyCasePath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         return lhs.appending(path: rhs)
     }
 }
 
-extension CasePath {
+extension AnyCasePath {
     /// Returns a new Optional path created by appending the given optional path to this one.
     ///
     /// The operator version of `CasePath.appending(path:)`. Use this method to extend this case path to the value type of another optional path.
@@ -221,7 +221,7 @@ extension CasePath {
     ///   - rhs: A optional path from the first optional path's value to some other appended value.
     /// - Returns: A new optional path from the first case path's root to the second optional path's value.
     public static func .. <AppendedValue>(
-        lhs: CasePath,
+        lhs: AnyCasePath<Root, Value>,
         rhs: OptionalPath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         return lhs.appending(path: rhs)
@@ -236,7 +236,7 @@ extension CasePath {
     ///   - rhs: A writeable path from the first optional path's value to some other appended value.
     /// - Returns: A new optional path from the first case path's root to the second writeable path's value.
     public static func .. <AppendedValue>(
-        lhs: CasePath,
+        lhs: AnyCasePath<Root, Value>,
         rhs: WritableKeyPath<Value, AppendedValue>
     ) -> OptionalPath<Root, AppendedValue> {
         return lhs.appending(path: rhs)

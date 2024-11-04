@@ -14,7 +14,7 @@ let package = Package(
             targets: ["RxComposableArchitecture"])
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-case-paths", exact: Version(0, 9, 0)),
+        .package(url: "https://github.com/pointfreeco/swift-case-paths", exact: Version(1, 5, 6)),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: Version(6, 6, 0)),
         .package(url: "https://github.com/FluidGroup/TextureSwiftSupport", exact: Version(3, 20, 1))
     ],
